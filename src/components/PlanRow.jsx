@@ -32,7 +32,8 @@ export default function PlanRow({ entry, showItem, onDone, onEdit, onDelete, onO
         <StatusBadge status={status} />
         {rel && <div className={'plan-rel rel-' + status}>{rel}</div>}
         <div className="plan-actions">
-          <button className="btn btn-sm btn-primary" onClick={() => onDone(entry)}>
+          {/* Alleen bij achterstallig onderhoud valt de knop op */}
+          <button className={'btn btn-sm' + (status === 'overdue' ? ' btn-primary' : '')} onClick={() => onDone(entry)}>
             <Icon name="check" size={15} /> {t('markDone')}
           </button>
           <button className="icon-btn" onClick={() => onEdit(entry)} title={t('edit')} aria-label={t('edit')}>

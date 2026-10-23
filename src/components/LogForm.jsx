@@ -130,7 +130,7 @@ export default function LogForm({ item, log, completing, onClose }) {
             <DateInput value={date} onChange={setDate} invalid={!!errors.date} ariaLabel={t('date')} />
           </Field>
           {isAuto && (
-            <Field label={t('km')} error={errors.km}>
+            <Field label={t('km')} error={errors.km} hint={t('kmUpdatesItem')}>
               <input
                 inputMode="numeric"
                 value={km}

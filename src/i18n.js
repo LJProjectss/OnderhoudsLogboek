@@ -102,6 +102,13 @@ const nl = {
   whicheverFirst: 'wat het eerst komt',
   completingPlan: 'Je vinkt "{name}" af. Er wordt een logregel gemaakt en het volgende moment wordt ingepland.',
   kmNeededForInterval: 'Vul de km-stand in om het km-interval te kunnen berekenen.',
+  kmUpdatesItem: 'Werkt ook de km-stand van de auto bij, zodat je planning op km klopt.',
+  overviewTitle: 'Overzicht',
+  overviewUpcoming: 'Eerstvolgend onderhoud',
+  overviewNothingPlanned: 'Nog geen onderhoud gepland.',
+  overviewItems: 'Items',
+  overviewOverdue: 'Te laat',
+  overviewSoon: 'Binnenkort',
   dateNeededForInterval: 'Vul een datum in om het interval te kunnen berekenen.',
 
   // Planning
@@ -297,6 +304,13 @@ const en = {
   whicheverFirst: 'whichever comes first',
   completingPlan: 'You are marking "{name}" as done. A log entry will be created and the next occurrence scheduled.',
   kmNeededForInterval: 'Enter the mileage to calculate the km interval.',
+  kmUpdatesItem: "Also updates the car's mileage, so your km planning stays right.",
+  overviewTitle: 'Overview',
+  overviewUpcoming: 'Upcoming maintenance',
+  overviewNothingPlanned: 'No maintenance planned yet.',
+  overviewItems: 'Items',
+  overviewOverdue: 'Overdue',
+  overviewSoon: 'Due soon',
   dateNeededForInterval: 'Enter a date to calculate the interval.',
 
   planned: 'Scheduled maintenance',

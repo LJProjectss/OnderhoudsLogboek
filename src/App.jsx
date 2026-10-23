@@ -60,7 +60,7 @@ function Banner({ upcoming }) {
   const soon = alerts.length - overdue;
 
   return (
-    <div className={'banner' + (overdue ? ' banner-overdue' : ' banner-soon')} role="region" aria-label={t('bannerTitle')}>
+    <div className={'banner banner-mobiel' + (overdue ? ' banner-overdue' : ' banner-soon')} role="region" aria-label={t('bannerTitle')}>
       <div className="banner-inner">
         <div className="banner-head">
           <Icon name="alert" size={18} />
@@ -179,10 +179,8 @@ export default function App() {
             <span>{t('appName')}</span>
           </div>
           <div className="mobile-actions">
+            {/* Exporteren en importeren staan op de telefoon onder Instellingen */}
             <button onClick={toggleTheme} aria-label={t('toggleTheme')}><Icon name={dark ? 'sun' : 'moon'} size={16} /></button>
-            <button onClick={backup.exportExcel} aria-label={t('exportExcelShort')}><Icon name="excel" size={16} /></button>
-            <button onClick={backup.exportData} aria-label={t('exportJsonShort')}><Icon name="download" size={16} /></button>
-            <button onClick={backup.triggerImport} aria-label={t('importShort')}><Icon name="upload" size={16} /></button>
           </div>
         </div>
         {backup.ImportInput}
@@ -192,7 +190,9 @@ export default function App() {
             <button onClick={() => backup.setMsg(null)} aria-label={t('bannerClose')}><Icon name="close" size={13} /></button>
           </div>
         )}
-        <Banner upcoming={upcoming} />
+        {/* Alleen op de startpagina van de telefoon: op de computer staat dezelfde lijst al in het overzicht,
+            en Planning toont hem uitgebreider */}
+        {current === 'items' && !param && <Banner upcoming={upcoming} />}
         <main className="main">{view}</main>
 
         {/* Onderbalk (mobiel) */}

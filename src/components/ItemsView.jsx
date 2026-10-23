@@ -91,13 +91,63 @@ export default function ItemsView({ selectedId, navigate }) {
         {selected ? (
           <ItemDetail key={selected.id} item={selected} upcoming={upcoming} navigate={navigate} />
         ) : (
-          <div className="empty-detail">
-            <span className="icon-circle"><Icon name="wrench" size={22} /></span>
-            <p>{state.items.length ? t('selectItem') : t('noItems')}</p>
-          </div>
+          state.items.length ? (
+            <Summary upcoming={upcoming} navigate={navigate} />
+          ) : (
+            <div className="empty-detail">
+              <span className="icon-circle"><Icon name="wrench" size={22} /></span>
+              <p>{t('noItems')}</p>
+            </div>
+          )
         )}
       </section>
       {modal}
+    </div>
+  );
+}
+
+/** Samenvatting zolang er geen item gekozen is (alleen zichtbaar op brede schermen) */
+function Summary({ upcoming, navigate }) {
+  const { state, t, settings } = useStore();
+  const thisYear = yearOf(todayISO());
+  const costYear = state.logs.filter((l) => yearOf(l.date) === thisYear).reduce((s, l) => s + (l.cost || 0), 0);
+  const overdue = upcoming.filter((u) => u.status === 'overdue').length;
+  const soon = upcoming.filter((u) => u.status === 'soon').length;
+  const next = upcoming.slice(0, 5);
+
+  return (
+    <div className="detail summary">
+      <h1>{t('overviewTitle')}</h1>
+      <div className="stats">
+        <div className="stat"><span className="stat-label">{t('overviewItems')}</span><span className="stat-value">{state.items.length}</span></div>
+        <div className={'stat' + (overdue ? ' stat-overdue' : '')}><span className="stat-label">{t('overviewOverdue')}</span><span className="stat-value">{overdue}</span></div>
+        <div className={'stat' + (soon ? ' stat-soon' : '')}><span className="stat-label">{t('overviewSoon')}</span><span className="stat-value">{soon}</span></div>
+        <div className="stat"><span className="stat-label">{t('costsThisYear', { year: thisYear })}</span><span className="stat-value">{fmtMoney(costYear, settings)}</span></div>
+      </div>
+      <section className="card">
+        <div className="card-head">
+          <h2>{t('overviewUpcoming')}</h2>
+          <button className="btn btn-sm btn-ghost" onClick={() => navigate('#/planning')}>{t('bannerShowAll')}</button>
+        </div>
+        {next.length ? (
+          <ul className="summary-list">
+            {next.map((u) => (
+              <li key={u.plan.id}>
+                <button className="banner-entry" onClick={() => navigate('#/items/' + u.item.id)}>
+                  <span className={'dot dot-' + u.status} />
+                  <TypeIcon type={u.item.type} size={14} />
+                  <span className="strong">{u.item.name}</span>
+                  <span>{u.plan.name}</span>
+                  <span className="muted">{dueText(u.plan, t, settings)}{u.daysLeft != null ? ' · ' + relDays(u.daysLeft, t) : ''}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="empty">{t('overviewNothingPlanned')}</p>
+        )}
+      </section>
+      <p className="muted summary-hint">{t('selectItem')}</p>
     </div>
   );
 }

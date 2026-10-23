@@ -236,6 +236,10 @@ svg { flex: none; }
   padding: 96px 24px; color: var(--muted); font-size: .875rem;
 }
 .empty-detail p { max-width: 24rem; margin: 0; }
+.summary h1 { margin: 0; }
+.summary .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.summary-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.summary-hint { font-size: .85rem; margin: 0; }
 .icon-circle {
   width: 56px; height: 56px; border-radius: 18px; display: grid; place-items: center;
   background: var(--pale-blue); color: var(--blue); margin-bottom: 18px;
@@ -346,6 +350,10 @@ tfoot td { font-weight: 700; border-top: 1px solid var(--border); border-bottom:
 .chip:hover { background: var(--surface-2); }
 .chip.active { background: var(--pale-blue); border-color: var(--blue); color: var(--blue); }
 .chip-count { font-size: .7rem; opacity: .7; }
+/* In de smalle itemlijst blijven de filters op één regel; zijwaarts scrollen als het niet past */
+.list-tools .chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 -2px; padding: 0 2px 2px; }
+.list-tools .chips::-webkit-scrollbar { display: none; }
+.list-tools .chip { flex: none; }
 
 /* ---------- Knoppen ---------- */
 .btn {
@@ -444,6 +452,9 @@ textarea { resize: vertical; }
 .settings p.muted { font-size: .875rem; margin: 0 0 4px; }
 
 /* ---------- Responsief ---------- */
+@media (min-width: 961px) {
+  .banner-mobiel { display: none; }
+}
 @media (max-width: 960px) {
   .items-layout { grid-template-columns: 1fr; }
   .item-list { position: static; max-height: none; }
