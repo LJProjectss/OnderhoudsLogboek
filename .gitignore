@@ -1,0 +1,20 @@
+# Afhankelijkheden
+node_modules/
+
+# Build-output
+dist/
+dev-dist/
+build/
+
+# Omgevingsvariabelen en geheimen
+.env
+.env.*
+!.env.example
+
+# Logs en systeembestanden
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
